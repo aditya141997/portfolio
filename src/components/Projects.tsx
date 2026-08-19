@@ -61,6 +61,24 @@ const projects: Project[] = [
     ],
     stack: ["PEFT", "Unsloth", "MLflow", "Prometheus", "Grafana", "Hugging Face"],
   },
+  {
+    tag: "PHARMACOVIGILANCE · HYBRID RAG",
+    title: "Pharma Chatbot",
+    summary:
+      "A hybrid FAISS + BM25 RAG chatbot over pharmacovigilance case reports, deployed live behind a full CI/CD pipeline.",
+    description:
+      "A conversational RAG system over adverse-event case report PDFs: parent/child chunking feeds semantic (FAISS) and keyword (BM25) retrieval, fused via Reciprocal Rank Fusion, with Gemini handling generation, structured extraction, and faithfulness checks. Shipped end-to-end — GitHub Actions CI/CD deploying to Render, re-architected twice mid-flight to fit a free-tier 512MB instance.",
+    details: [
+      "Parent/child chunking (paragraph parents, sentence children) with RRF-fused hybrid retrieval",
+      "Local ONNX embeddings (fastembed, BAAI/bge-small-en-v1.5) — no torch, no external rate limits",
+      "Precomputed embedding cache checked into the repo — index rebuilds in under a second instead of ~11 minutes",
+      "Structured extraction into Pydantic ICSR-style schemas: patient, product, reaction, lab, summary",
+      "RAGAS faithfulness + context-relevance scoring alongside an LLM-judged faithfulness check",
+      "GitHub Actions CI (lint + build) → CD → Render, session-memory and single-shot FastAPI variants",
+    ],
+    stack: ["FastAPI", "FAISS", "BM25", "fastembed", "Gemini", "RAGAS", "GitHub Actions", "Render"],
+    link: "https://github.com/aditya141997/pharma-chatbot",
+  },
 ];
 
 export default function Projects() {
